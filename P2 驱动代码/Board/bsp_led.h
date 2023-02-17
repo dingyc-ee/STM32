@@ -3,7 +3,8 @@
 
 #include "stm32f4xx.h"
 
-typedef enum {
+typedef enum
+{
     LED_1,
     LED_2,
     LED_3,
@@ -14,4 +15,4 @@ extern void LED_Init(void);
 extern void LED_ON(LED_Typedef led);
 extern void LED_OFF(LED_Typedef led);
 
-#endif  /* __BSP_LED_H__ */
+#endif /* __BSP_LED_H__ */

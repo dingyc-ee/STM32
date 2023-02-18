@@ -38,10 +38,23 @@ void USART_Config(void)
 
 int fputc(int ch, FILE *f)
 {
-    USART_SendData(USART3, (uint8_t) ch);
-    
+    USART3->SR;
+    USART_SendData(USART3, ch);
     while (USART_GetFlagStatus(USART3, USART_FLAG_TC) == RESET)
         ;
 
     return ch;
 }
+
+int fgetc(FILE *f)
+{
+    int ch;
+   
+    while (USART_GetFlagStatus(USART3, USART_FLAG_RXNE) == RESET)
+        ;
+    ch = USART_ReceiveData(USART3);
+    USART_SendData(USART3, ch);
+
+    return ch;
+}
+

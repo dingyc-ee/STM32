@@ -24,6 +24,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
+#include "FreeRTOS.h"
+#include "FreeRTOSConfig.h"
+#include "task.h"
 #include "bsp_led.h"
 #include "bsp_uart.h"
 

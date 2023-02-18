@@ -29,12 +29,30 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+TaskHandle_t led_task_hd;
+TaskHandle_t terminal_task_hd;
+
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
-static void soft_delay(uint32_t num)
+void led_task( void * pv)
 {
-    while (num--)
-        ;
+    while (1) {
+        LED_ON(LED_1);
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+        LED_OFF(LED_1);
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
+    }
+}
+
+void terminal_task( void * pv)
+{
+    char str[128];
+
+    while (1) {
+        printf("Input:");
+        scanf("%s", str);
+        printf("\r\nOutput:%s\r\n", str);
+    }
 }
 
 /**
@@ -46,16 +64,14 @@ int main(void)
 {
     LED_Config();
     USART_Config();
+
+    printf("This is stm32f407 + freertos + lwip project!\r\n");
     
-    printf("\n\rUSART Printf Example: retarget the C library printf function to the USART\n\r");
-    
-    while (1)
-    {
-        LED_ON(LED_1);
-        soft_delay(0xffffff);
-        LED_OFF(LED_1);
-        soft_delay(0xffffff);
-    }
+    xTaskCreate( led_task, "led_task", 2 * 1024, NULL, configMAX_PRIORITIES - 1, &led_task_hd );
+    xTaskCreate( terminal_task, "terminal_task", 2 * 1024, NULL, configMAX_PRIORITIES - 1, &terminal_task_hd );
+
+    vTaskStartScheduler();
+    return 0;
 }
 
 #ifdef USE_FULL_ASSERT

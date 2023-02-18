@@ -5,14 +5,14 @@
 
 typedef enum
 {
-    LED_1,
-    LED_2,
-    LED_3,
-    LED_MAX
-} LED_Typedef;
+    USER_LED_1,
+    USER_LED_2,
+    USER_LED_3,
+    USER_LED_AMX
+} UserLed_t;
 
 extern void LED_Config(void);
-extern void LED_ON(LED_Typedef led);
-extern void LED_OFF(LED_Typedef led);
+extern void LED_ON(UserLed_t led);
+extern void LED_OFF(UserLed_t led);
 
 #endif /* __BSP_LED_H__ */

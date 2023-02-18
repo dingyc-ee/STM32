@@ -428,6 +428,16 @@
               <FileType>1</FileType>
               <FilePath>..\Board\bsp_uart.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Board\bsp_key.c</FilePath>
+            </File>
+            <File>
+              <FileName>flexible_button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Board\flexible_button.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

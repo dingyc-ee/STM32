@@ -29,6 +29,8 @@
 #include "task.h"
 #include "bsp_led.h"
 #include "bsp_uart.h"
+#include "flexible_button.h"
+#include "bsp_key.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

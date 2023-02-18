@@ -2,7 +2,7 @@
 #include "stm32f4xx_rcc.h"
 #include "bsp_led.h"
 
-void LED_Init(void)
+void LED_Config(void)
 {
     GPIO_InitTypeDef GPIO_InitStructure;
 

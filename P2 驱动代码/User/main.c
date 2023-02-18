@@ -44,20 +44,16 @@ static void soft_delay(uint32_t num)
  */
 int main(void)
 {
-    LED_Init();
+    LED_Config();
+    USART_Config();
+    
+    printf("\n\rUSART Printf Example: retarget the C library printf function to the USART\n\r");
+    
     while (1)
     {
         LED_ON(LED_1);
         soft_delay(0xffffff);
         LED_OFF(LED_1);
-        soft_delay(0xffffff);
-        LED_ON(LED_2);
-        soft_delay(0xffffff);
-        LED_OFF(LED_2);
-        soft_delay(0xffffff);
-        LED_ON(LED_3);
-        soft_delay(0xffffff);
-        LED_OFF(LED_3);
         soft_delay(0xffffff);
     }
 }

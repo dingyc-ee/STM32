@@ -11,7 +11,7 @@ typedef enum
     LED_MAX
 } LED_Typedef;
 
-extern void LED_Init(void);
+extern void LED_Config(void);
 extern void LED_ON(LED_Typedef led);
 extern void LED_OFF(LED_Typedef led);
 

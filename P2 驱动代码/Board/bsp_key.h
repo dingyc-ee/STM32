@@ -11,6 +11,9 @@ typedef enum {
     USER_BUTTON_MAX
 } UserButton_t;
 
+typedef void (* ButtonCallback)(UserButton_t btn, flex_button_event_t event);
+
 void Button_Config(void);
+void Button_RegisterCallback(ButtonCallback btn_cb);
 
 #endif  /* __BSP_KEY_H__ */

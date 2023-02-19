@@ -30,9 +30,9 @@ static char *enum_btn_id_string[] = {
     ENUM_TO_STR(USER_BUTTON_MAX),
 };
 
-static flex_button_t user_button[USER_BUTTON_MAX];
+static ButtonCallback user_button_callback = NULL;
 
-static TaskHandle_t btn_task_hd;
+static flex_button_t user_button[USER_BUTTON_MAX];
 
 static uint8_t common_btn_read(void *arg)
 {
@@ -66,11 +66,9 @@ static void common_btn_evt_cb(void *arg)
         btn->id, enum_btn_id_string[btn->id],
         btn->event, enum_event_string[btn->event],
         btn->click_cnt);
-
-    if ((flex_button_event_read(&user_button[USER_BUTTON_1]) == FLEX_BTN_PRESS_CLICK) &&\
-        (flex_button_event_read(&user_button[USER_BUTTON_2]) == FLEX_BTN_PRESS_CLICK))
-    {
-        printf("[combination]: button 1 and button 2\r\n");
+    
+    if (user_button_callback) {
+        user_button_callback((UserButton_t)(btn->id), (flex_button_event_t)(btn->event));
     }
 }
 
@@ -97,8 +95,7 @@ void Button_Config(void)
 
     GPIO_Init(GPIOE, &GPIO_InitStructure);
 
-    for (i = 0; i < USER_BUTTON_MAX; i ++)
-    {
+    for (i = 0; i < USER_BUTTON_MAX; i++) {
         user_button[i].id = i;
         user_button[i].usr_button_read = common_btn_read;
         user_button[i].cb = common_btn_evt_cb;
@@ -110,5 +107,10 @@ void Button_Config(void)
         flex_button_register(&user_button[i]);
     }
 
-    xTaskCreate(button_scan, "button_scan", 1024, NULL, 0, &btn_task_hd);
+    xTaskCreate(button_scan, "button_scan", 1024, NULL, 0, NULL);
+}
+
+void Button_RegisterCallback(ButtonCallback btn_cb)
+{
+    user_button_callback = btn_cb;
 }

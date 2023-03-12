@@ -308,6 +308,7 @@
   */
 
 #include "stm32f4xx.h"
+#include <stdio.h>
 
 /**
   * @}
@@ -341,9 +342,9 @@
      through STLINK MCO pin of STM32F103 microcontroller. The frequency cannot be changed
      and is fixed at 8 MHz. 
      Hardware configuration needed for Nucleo Board:
-     – SB54, SB55 OFF
-     – R35 removed
-     – SB16, SB50 ON */
+        SB54, SB55 OFF
+        R35 removed
+        SB16, SB50 ON */
 /* #define USE_HSE_BYPASS */
 
 #if defined(USE_HSE_BYPASS)     
@@ -1373,6 +1374,13 @@ void SystemInit_ExtMemCtl(void)
 }
 #endif /* DATA_IN_ExtSDRAM && DATA_IN_ExtSRAM */
 
+void PrintSysClock(void)
+{
+    printf("STM32F407 Clock:\r\n");
+    printf("    HSE_HSE_VALUE:%dMHz\r\n", HSE_VALUE / 1000 / 1000);
+    printf("    Scale PLL_M:%d PLL_N:%d PLL_P:%d PLL_Q:%d\r\n", PLL_M, PLL_N, PLL_P, PLL_Q);
+    printf("    SystemCoreClock:%dMHz\r\n", SystemCoreClock / 1000 / 1000);
+}
 
 /**
   * @}

@@ -313,7 +313,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>2</Optim>
+            <Optim>1</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F40_41xxx</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Libraries\CMSIS\Device\Include;..\Libraries\CMSIS\Include;..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\User;..\Board;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM4F</IncludePath>
+              <IncludePath>..\Libraries\CMSIS\Device\Include;..\Libraries\CMSIS\Include;..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM4F;..\User;..\User\led;..\User\uart</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -413,30 +413,15 @@
               <FileType>1</FileType>
               <FilePath>..\User\stm32f4xx_it.c</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Board</GroupName>
-          <Files>
             <File>
               <FileName>bsp_led.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Board\bsp_led.c</FilePath>
+              <FilePath>..\User\led\bsp_led.c</FilePath>
             </File>
             <File>
               <FileName>bsp_uart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Board\bsp_uart.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_key.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Board\bsp_key.c</FilePath>
-            </File>
-            <File>
-              <FileName>flexible_button.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Board\flexible_button.c</FilePath>
+              <FilePath>..\User\uart\bsp_uart.c</FilePath>
             </File>
           </Files>
         </Group>

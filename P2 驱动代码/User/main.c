@@ -29,19 +29,8 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-TaskHandle_t led_task_hd;
-
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
-void led_task( void * pv)
-{
-    while (1) {
-        LED_ON(USER_LED_1);
-        vTaskDelay(1000 / portTICK_PERIOD_MS);
-        LED_OFF(USER_LED_1);
-        vTaskDelay(1000 / portTICK_PERIOD_MS);
-    }
-}
 
 /**
  * @brief  Main program
@@ -51,13 +40,11 @@ void led_task( void * pv)
 int main(void)
 {
     LED_Config();
-    Button_Config();
+    USART_Config();
 
-    printf("This is stm32f407 + freertos + lwip project!\r\n");
-    
-    xTaskCreate( led_task, "led_task", 2 * 1024, NULL, configMAX_PRIORITIES - 1, &led_task_hd );
-    vTaskStartScheduler();
-    
+    PrintSysClock();
+    LED_ON(LED_ALL);
+
     return 0;
 }
 
@@ -81,6 +68,7 @@ void assert_failed(uint8_t *file, uint32_t line)
     }
 }
 #endif
+
 
 /**
  * @}
